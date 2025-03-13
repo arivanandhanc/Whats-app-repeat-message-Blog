@@ -1,0 +1,33 @@
+const { Client } = require("whatsapp-web.js");
+const qrcode = require("qrcode-terminal");
+
+const client = new Client();
+
+client.on("qr", qr => {
+    qrcode.generate(qr, { small: true });
+});
+
+client.on("ready", () => {
+    console.log("✅ Client is ready!");
+
+    let phoneNumber = "918870407942"; // No '+' symbol
+    let message = "Sorry!";
+    let count = 0;
+    let maxMessages = 1000;
+
+    function sendMessageWithDelay() {
+        if (count < maxMessages) {
+            client.sendMessage(`${phoneNumber}@c.us`, message).then(() => {
+                console.log(`✅ Message ${count + 1} sent`);
+                count++;
+                setTimeout(sendMessageWithDelay, 1000); // 1-second delay before sending the next message
+            }).catch(err => {
+                console.log("❌ Error sending message:", err);
+            });
+        }
+    }
+
+    sendMessageWithDelay(); // Start the message sending process
+});
+
+client.initialize();
