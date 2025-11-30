@@ -10,7 +10,7 @@ client.on("qr", qr => {
 client.on("ready", () => {
     console.log("✅ Client is ready!");
 
-    let phoneNumber = "918870407942"; // No '+' symbol
+    let phoneNumber = "987456321"; // No '+' symbol
     let message = "Sorry!";
     let count = 0;
     let maxMessages = 1000;
